@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: phishguard
+      MYSQL_USER: phishguard
+      MYSQL_PASSWORD: Keerthana
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      # Host side only — 3306 conflicts with a MySQL instance already
+      # running natively on this machine. This mapping only matters if you
+      # want to connect to the containerized MySQL from a tool on the host
+      # (e.g. MySQL Workbench at localhost:3307) — the backend container
+      # itself never uses it; it talks to MySQL over Docker's internal
+      # network via the "mysql" hostname and the unaffected internal port
+      # 3306 (right side), regardless of what's mapped here.
+      - "3307:3306"
+    volumes:
+      - phishguard-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: phishguard
+      DB_USER: phishguard
+      DB_PASSWORD: Keerthana
+      PHISHGUARD_JWT_SECRET: change-this-in-production-min-32-bytes-long
+      # Optional — leave blank to run on local heuristics only:
+      SAFE_BROWSING_API_KEY: ""
+      VIRUSTOTAL_API_KEY: ""
+      ABUSEIPDB_API_KEY: ""
+      WHOIS_API_KEY: ""
+      MAIL_USERNAME: ${MAIL_USERNAME:-keerthi9643@gmail.com}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-yacy fxtp esng mlmw}
+    ports:
+      # Host side only — 8009 kept conflicting with something else on this
+      # machine. The container's internal port (right side) stays 8009,
+      # unaffected — that's what the Spring Boot app itself listens on
+      # (server.port in application.yml). Only how you REACH it from the
+      # host machine changes: http://localhost:8090 instead of :8009.
+      - "8090:8009"
+
+volumes:
+  phishguard-mysql-data:

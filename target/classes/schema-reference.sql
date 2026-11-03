@@ -31,7 +31,3 @@ CREATE TABLE IF NOT EXISTS scan_history (
     INDEX idx_scan_domain (domain),
     INDEX idx_scan_created (created_at)
 );
-
--- Default admin (email: admin@phishguard.local / password: ChangeMe123!) is
--- created automatically by DataSeeder.java on first app startup, not here,
--- so the password is always properly BCrypt-hashed by the app itself.

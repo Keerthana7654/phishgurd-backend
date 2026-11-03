@@ -24,9 +24,6 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-The default profile uses an in-memory H2 database, so there's nothing to
-install or configure to try it. On startup it seeds an admin account:
-`admin@phishguard.local` / `ChangeMe123!` (change this immediately if you
 ever deploy for real — override via `PHISHGUARD_ADMIN_EMAIL` /
 `PHISHGUARD_ADMIN_PASSWORD` env vars).
 

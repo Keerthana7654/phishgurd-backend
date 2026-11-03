@@ -62,7 +62,7 @@ phishguard:
     refresh-token-expiry-ms: 604800000   # 7 days
 
   cors:
-    allowed-origins: "http://localhost:5173,chrome-extension://*"
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:}
 
   scoring:
     warn-threshold: 51

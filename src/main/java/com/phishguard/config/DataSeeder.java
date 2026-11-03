@@ -24,10 +24,10 @@ public class DataSeeder implements CommandLineRunner {
     @Autowired private UserRepository userRepository;
     @Autowired private PasswordEncoder passwordEncoder;
 
-    @Value("${PHISHGUARD_ADMIN_EMAIL:admin@phishguard.local}")
+    @Value("${PHISHGUARD_ADMIN_EMAIL:}")
     private String adminEmail;
 
-    @Value("${PHISHGUARD_ADMIN_PASSWORD:Admin@123}")
+    @Value("${PHISHGUARD_ADMIN_PASSWORD:}")
     private String adminPassword;
 
     @Override

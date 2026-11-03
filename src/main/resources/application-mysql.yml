@@ -1,13 +1,15 @@
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:phishguard}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:phishguard}?sslMode=REQUIRED&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DB_USER:phishguard}
-    password: ${DB_PASSWORD:phishguard}
+    username: ${DB_USER:}
+    password: ${DB_PASSWORD:}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
+      show-sql: false
+      open-in-view: false
   h2:
     console:
       enabled: false

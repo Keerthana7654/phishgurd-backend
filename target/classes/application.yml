@@ -40,7 +40,7 @@ spring:
     open-in-view: false
 
 server:
-  port: 8009
+ port: ${PORT:8009}
 
 springdoc:
   swagger-ui:

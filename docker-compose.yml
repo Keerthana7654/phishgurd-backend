@@ -45,8 +45,8 @@ services:
       VIRUSTOTAL_API_KEY: ""
       ABUSEIPDB_API_KEY: ""
       WHOIS_API_KEY: ""
-      MAIL_USERNAME: ${MAIL_USERNAME:-keerthi9643@gmail.com}
-      MAIL_PASSWORD: ${MAIL_PASSWORD:-yacy fxtp esng mlmw}
+      MAIL_USERNAME: ${MAIL_USERNAME:}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:}
     ports:
       # Host side only — 8009 kept conflicting with something else on this
       # machine. The container's internal port (right side) stays 8009,
